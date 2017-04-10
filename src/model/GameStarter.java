@@ -5,6 +5,8 @@ import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import logic.AI;
+import logic.Logic;
 
 /**
  *  A class which provides a starting interface to choose what game sizes
@@ -67,7 +69,7 @@ public class GameStarter extends JFrame {
     private void createGameButton(final int size) {
         JButton button = new JButton(size + "x" + size);
         button.addActionListener((ActionEvent e) -> {
-            final int ret = gameCreator();
+            final int ret = gameCreator(size);
             if (-1 != ret) {
                 dispose();
             }
@@ -75,7 +77,7 @@ public class GameStarter extends JFrame {
         getContentPane().add(button);
     }
     
-    private int gameCreator() {
+    private int gameCreator(final int size) {
         final int choice = JOptionPane.showOptionDialog( null
                         , "Hogyan szeretne játszani?"
                         , "Játék kezdése"
@@ -85,7 +87,8 @@ public class GameStarter extends JFrame {
                         , new Object[] {"Offline", "Online"}
                         , "Offline" );
         if (0 == choice) {
-            // TODO
+            Logic gameLogic = new AI();
+            Game game = new Game(gameLogic, size);
         } else if (1 == choice) {
             
         }

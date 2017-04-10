@@ -11,8 +11,8 @@ public class Hunter {
      * @param args - optional: (int) number of games, (int) game size
      */
     public static void main(String[] args) {
-        int num_of_games = 8;
-        int game_size_difference = 16;
+        int num_of_games = 10;
+        int game_size_difference = 3;
         try {
             if (args.length > 0) {
                 num_of_games = Integer.parseInt(args[0]);
@@ -22,12 +22,10 @@ public class Hunter {
                 game_size_difference = Integer.parseInt(args[0]);
             }
         } catch (NumberFormatException e) {
-            System.err.println(e.getMessage());
+            System.err.println("Kérem számot adjon meg a program paramétereként"
+                    + ", vagy semmit.");
         }
-        new GameStarter(num_of_games, game_size_difference);
-        new GameStarter(4);
-        new GameStarter(16);
-        new GameStarter(12);
+        GameStarter game = new GameStarter(num_of_games, game_size_difference);
     }
     
 }
