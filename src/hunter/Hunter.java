@@ -17,8 +17,7 @@ public class Hunter {
             if (args.length > 0) {
                 num_of_games = Integer.parseInt(args[0]);
                 game_size_difference = num_of_games;
-            }
-            if (args.length > 1) {
+            } else if (args.length > 1) {
                 game_size_difference = Integer.parseInt(args[0]);
             }
         } catch (NumberFormatException e) {
