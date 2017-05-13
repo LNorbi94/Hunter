@@ -4,7 +4,9 @@ import java.awt.FlowLayout;
 import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import logic.AI;
 import logic.Logic;
 
@@ -90,7 +92,54 @@ public class GameStarter extends JFrame {
             Logic gameLogic = new AI();
             Game game = new Game(gameLogic, size);
         } else if (1 == choice) {
+            JFrame frame;
+            JTextField ipTextField;
+            JTextField portTextField;
             
+            frame = new JFrame();
+            frame.setBounds(100,100,300,200);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.getContentPane().setLayout(null);
+            
+            ipTextField = new JTextField();
+            ipTextField.setBounds(128,28,86,20);
+            frame.getContentPane().add(ipTextField);
+            ipTextField.setColumns(10);
+            
+            JLabel lblIP = new JLabel("IP");
+            lblIP.setBounds(65,31,46,14);
+            frame.getContentPane().add(lblIP);
+            
+            portTextField = new JTextField();
+            portTextField.setBounds(128,56,86,20);
+            frame.getContentPane().add(portTextField);
+            portTextField.setColumns(10);
+            
+            JLabel lblPort = new JLabel("Port");
+            lblPort.setBounds(65,60,46,14);
+            frame.getContentPane().add(lblPort);
+            
+            JButton okButton = new JButton("OK");
+            JButton backButton = new JButton("Mégse");
+            
+            okButton.setBounds(50,110,86,20);
+            backButton.setBounds(140,110,86,20);
+            
+            okButton.addActionListener((ActionEvent e) -> {
+                Logic gameLogic = new AI();
+                Game game = new Game(gameLogic,size);
+            });
+            
+            backButton.addActionListener((ActionEvent e) -> {
+                exit();
+            });
+            
+            frame.getContentPane().add(okButton);
+            frame.getContentPane().add(backButton);
+            
+            frame.setVisible(true);
+            /*Logic gameLogic = new AI();
+            Game game = new Game(gameLogic,size);*/
         }
         return choice;
     }
