@@ -41,7 +41,7 @@ public class Client extends Logic {
     
     
     public void play() throws IOException{
-       //System.out.println(br.readLine());
+       System.out.println(br.readLine());
        
        //receive message from server
        //set Hunter's position from the message
@@ -53,7 +53,9 @@ public class Client extends Logic {
     
     @Override
     public int pressButton(String title, JButton button, int i, int j) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       genericStep(button,i,j);
+       return -1;  
     }
     
     public static void main(String[] arg){

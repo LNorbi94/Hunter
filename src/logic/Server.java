@@ -43,7 +43,7 @@ public class Server extends Logic{
         }
     }
     
-    /*Connect the client, make one step, send to the client*/
+    /*Connect the client, make one step, send to  client*/
     public void start() throws IOException{
         try{
             Socket prey = hunter.accept();
@@ -55,7 +55,8 @@ public class Server extends Logic{
             e.printStackTrace();
         }
         
-       //example: pw.println("Hello kliens");
+       //example:
+       pw.println("Hello kliens");
         
         //make one step and send to client
         
@@ -64,7 +65,8 @@ public class Server extends Logic{
     
     @Override
     public int pressButton(String title, JButton button, int i, int j) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        genericStep(button,i,j);
+        return -1;        
     }
     
     

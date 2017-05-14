@@ -2,13 +2,18 @@ package model;
 
 import java.awt.FlowLayout;
 import java.awt.event.*;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import logic.AI;
+import logic.Client;
 import logic.Logic;
+import logic.Server;
 
 /**
  *  A class which provides a starting interface to choose what game sizes
@@ -126,8 +131,21 @@ public class GameStarter extends JFrame {
             backButton.setBounds(140,110,86,20);
             
             okButton.addActionListener((ActionEvent e) -> {
-                Logic gameLogic = new AI();
-                Game game = new Game(gameLogic,size);
+               // Logic gameLogic = new AI();
+                //Game game = new Game(gameLogic,size);
+                Server s = new Server(Integer.parseInt(portTextField.getText()),ipTextField.getText());
+                try {
+                    Client c = new Client(Integer.parseInt(portTextField.getText()),ipTextField.getText());
+                    s.start(); // próba az üzenet küldésre,fogadásra
+                    c.play();  // próba az üzenet küldésre,fogadásra
+                    Game game1 = new Game(s,size);
+                    Game game2 = new Game(c,size);
+                } catch (IOException ex) {
+                    System.err.println("Error with connecting client");
+                    Logger.getLogger(GameStarter.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
             });
             
             backButton.addActionListener((ActionEvent e) -> {
