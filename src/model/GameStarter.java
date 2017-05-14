@@ -138,8 +138,9 @@ public class GameStarter extends JFrame {
                     Client c = new Client(Integer.parseInt(portTextField.getText()),ipTextField.getText());
                     s.start(); // próba az üzenet küldésre,fogadásra
                     c.play();  // próba az üzenet küldésre,fogadásra
-                    Game game1 = new Game(s,size);
-                    Game game2 = new Game(c,size);
+                    
+                    Game gameClient = new Game(c,size);
+                    Game gameServer = new Game(s,size);
                 } catch (IOException ex) {
                     System.err.println("Error with connecting client");
                     Logger.getLogger(GameStarter.class.getName()).log(Level.SEVERE, null, ex);
