@@ -95,6 +95,5 @@ public abstract class Logic {
 
     private boolean isNextTo(int i, int j, UniqueButton selected) {
         return Math.abs(selected.i - i) <= 1 && Math.abs(selected. j - j) <= 1;
-    }
-    
+    }    
 }
