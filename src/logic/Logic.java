@@ -4,29 +4,13 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
+import utils.UniqueButton;
 
 /**
  *
  * @author lestarn
  */
 public abstract class Logic {
-    
-    public class UniqueButton {
-        public int i;
-        public int j;
-        public JButton place;
-        
-        UniqueButton(final int i, final int j, final JButton place) {
-            setData(i, j, place);
-        }
-        
-        public final void setData(final int i, final int j
-                , final JButton place) {
-            this.i = i;
-            this.j = j;
-            this.place = place;
-        }
-    }
     
     public final static String HUNTER   = "Támadó";
     public final static String PREY     = "Menekülő";
@@ -95,5 +79,6 @@ public abstract class Logic {
 
     private boolean isNextTo(int i, int j, UniqueButton selected) {
         return Math.abs(selected.i - i) <= 1 && Math.abs(selected. j - j) <= 1;
-    }    
+    }
+    
 }

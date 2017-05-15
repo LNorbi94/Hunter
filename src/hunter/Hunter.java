@@ -11,13 +11,14 @@ public class Hunter {
      * @param args - optional: (int) number of games, (int) game size
      */
     public static void main(String[] args) {
-        int num_of_games = 10;
-        int game_size_difference = 3;
+        int num_of_games = 5;
+        int game_size_difference = 2;
         try {
             if (args.length > 0) {
                 num_of_games = Integer.parseInt(args[0]);
                 game_size_difference = num_of_games;
-            } else if (args.length > 1) {
+            }
+            if (args.length > 1) {
                 game_size_difference = Integer.parseInt(args[0]);
             }
         } catch (NumberFormatException e) {
