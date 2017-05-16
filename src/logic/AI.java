@@ -17,10 +17,10 @@ public class AI extends Logic {
         if (steppedAway) {
             switchButtons(false);
             List<UniqueButton> validButtons = new ArrayList<>();
-            for (int k = -1; k < 1; ++k) {
-                for (int l = -1; l < 1; ++l) {
-                    int x = Prey.i + l;
-                    int y = Prey.j + k;
+            for (int k = -1; k <= 1; ++k) {
+                for (int l = -1; l <= 1; ++l) {
+                    int x = Prey.i + k;
+                    int y = Prey.j + l;
                     if (isValid(x, y)
                             && isNextTo(x, y, Prey)) {
                         boolean empty 
