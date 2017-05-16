@@ -7,6 +7,7 @@ import javax.swing.JButton;
  * @author lestarn
  */
 public class UniqueButton {
+    public int distance;
     public int i;
     public int j;
     public JButton place;
@@ -19,5 +20,9 @@ public class UniqueButton {
         this.i = i;
         this.j = j;
         this.place = place;
+    }
+    
+    public double distanceFrom(UniqueButton other) {
+        return Math.sqrt(Math.pow(i - other.i, 2) + Math.pow(j - other.j, 2));
     }
 }

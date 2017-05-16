@@ -16,10 +16,10 @@ public abstract class Logic {
     public final static String PREY     = "Menekülő";
     public final static String NOONE    = "-";
     
-    private JButton[][] gameTable;
+    protected JButton[][] gameTable;
     
-    private List<UniqueButton> Hunters;
-    private UniqueButton Prey;
+    protected List<UniqueButton> Hunters;
+    protected UniqueButton Prey;
     
     public String me;
     public UniqueButton selected;
@@ -60,26 +60,42 @@ public abstract class Logic {
     public abstract int pressButton(String title, JButton button
             , final int i, final int j);
     
-    public void genericStep(final JButton button, final int i, final int j) {
+    public boolean genericStep(final JButton button, final int i, final int j) {
         if (selected == null) {
             if (button.getText().equals(me)) {
                 button.setBackground( new Color(125, 127, 255) );
                 selected = new UniqueButton(i, j, button);
             }
-            return;
+            return false;
         }
         if (selected.place == button
                 || (isNextTo(i, j, selected) && button.getText().equals(""))) {
+            boolean steppedAway = selected.place != button;
             selected.place.setBackground(new JButton().getBackground());
             selected.place.setText("");
             selected = null;
             button.setText(me);
+            return steppedAway;
         }
+        return false;
     }
 
-    private boolean isNextTo(int i, int j, UniqueButton selected) {
-        return (Math.abs(selected.i - i) <= 1 && Math.abs(selected.j - j) == 0 )||
-                (Math.abs(selected.i - i) ==0 && Math.abs(selected.j - j) <= 1) ;
+    protected boolean isNextTo(int i, int j, UniqueButton selected) {
+        return  (Math.abs(selected.i - i) <= 1 && Math.abs(selected.j - j) == 0) ||
+                (Math.abs(selected.i - i) == 0 && Math.abs(selected.j - j) <= 1) ;
+    }
+    
+    protected boolean isValid(int i, int j) {
+        final int gameSize = gameTable.length;
+        return i >= 0 && j >= 0 && i < gameSize && j < gameSize;
+    }
+    
+    protected void switchButtons(boolean state) {
+        for (JButton[] buttons : gameTable) {
+            for (JButton button : buttons) {
+                button.setEnabled(state);
+            }
+        }
     }
     
 }
