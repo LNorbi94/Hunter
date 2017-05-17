@@ -57,7 +57,7 @@ public class GameStarter extends JFrame {
     private void initialize() {
         setTitle("Vadászat");
         int height = 60 * (NUM_OF_GAMES / 4);
-        if (4 > NUM_OF_GAMES) {
+        if (5 >= NUM_OF_GAMES) {
             height = 75;
         }
         setBounds(100, 100, 400, height);
