@@ -102,51 +102,51 @@ public class GameStarter extends JFrame {
             JTextField portTextField;
             
             frame = new JFrame();
-            frame.setBounds(100,100,300,200);
+            frame.setBounds(100, 100, 300, 200);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.getContentPane().setLayout(null);
             
             ipTextField = new JTextField();
-            ipTextField.setBounds(128,28,86,20);
+            ipTextField.setBounds(128, 28, 86, 20);
             frame.getContentPane().add(ipTextField);
             ipTextField.setColumns(10);
             
             JLabel lblIP = new JLabel("IP");
-            lblIP.setBounds(65,31,46,14);
+            lblIP.setBounds(65, 31, 46, 14);
             frame.getContentPane().add(lblIP);
             
             portTextField = new JTextField();
-            portTextField.setBounds(128,56,86,20);
+            portTextField.setBounds(128, 56, 86, 20);
             frame.getContentPane().add(portTextField);
             portTextField.setColumns(10);
             
             JLabel lblPort = new JLabel("Port");
-            lblPort.setBounds(65,60,46,14);
+            lblPort.setBounds(65, 60, 46, 14);
             frame.getContentPane().add(lblPort);
             
             JButton okButton = new JButton("OK");
             JButton backButton = new JButton("Mégse");
             
-            okButton.setBounds(50,110,86,20);
-            backButton.setBounds(140,110,86,20);
+            okButton.setBounds(50, 110, 86, 20);
+            backButton.setBounds(140, 110, 86, 20);
             
             okButton.addActionListener((ActionEvent e) -> {
-               // Logic gameLogic = new AI();
-                //Game game = new Game(gameLogic,size);
-                Server s = new Server(Integer.parseInt(portTextField.getText()),ipTextField.getText());
+                String host = ipTextField.getText();
                 try {
-                    Client c = new Client(Integer.parseInt(portTextField.getText()),ipTextField.getText());
-                    s.start(); // próba az üzenet küldésre,fogadásra
-                    c.play();  // próba az üzenet küldésre,fogadásra
+                    int port = Integer.parseInt(portTextField.getText());
+                    Logic gameLogic;
                     
-                    Game gameClient = new Game(c,size);
-                    Game gameServer = new Game(s,size);
-                } catch (IOException ex) {
-                    System.err.println("Error with connecting client");
-                    Logger.getLogger(GameStarter.class.getName()).log(Level.SEVERE, null, ex);
+                    if (null != host) {
+                        gameLogic = new Server(port);
+                    } else {
+                        gameLogic = new Client(host, port);
+                    }
+                    
+                    Game game = new Game(gameLogic, size);
+                } catch (NumberFormatException numE) {
+                    JOptionPane.showMessageDialog(null
+                            , "Kérem számot adjon meg portként!");
                 }
-                
-                
             });
             
             backButton.addActionListener((ActionEvent e) -> {
@@ -157,8 +157,6 @@ public class GameStarter extends JFrame {
             frame.getContentPane().add(backButton);
             
             frame.setVisible(true);
-            /*Logic gameLogic = new AI();
-            Game game = new Game(gameLogic,size);*/
         }
         return choice;
     }

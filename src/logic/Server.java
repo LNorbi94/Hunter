@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package logic;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Scanner;
 import javax.swing.JButton;
 
 /**
@@ -24,58 +15,34 @@ import javax.swing.JButton;
 public class Server extends Logic{
 
     private int port;
-    private String ip;
-    private PrintWriter pw;
-    private BufferedReader br;
+    private PrintWriter out;
+    private Scanner in;
     
-    private ServerSocket hunter;
-    
-    
-    
-    public Server(int port, String ip) {
+    public Server(int port) {
         this.port = port;
-        this.ip = ip;
-        try {
-            this.hunter = new ServerSocket(port);                    
-        } catch (IOException e) {
-            System.err.print("Error with starting the hunter.");
-            e.printStackTrace();
+        try (ServerSocket ss = new ServerSocket(port);
+                Socket s = ss.accept();) {
+            out = new PrintWriter(s.getOutputStream());
+            in = new Scanner(s.getInputStream());
+        } catch (Exception e) {
+            System.err.printf("Can't start server on %d port.\n", port);
         }
     }
-    
-    /*Connect the client, make one step, send to  client*/
-    public void start() throws IOException{
-        try{
-            Socket prey = hunter.accept();
-            pw = new PrintWriter(prey.getOutputStream(),true);
-            br = new BufferedReader(new InputStreamReader(prey.getInputStream()));
-   
-        }catch(IOException e){
-            System.err.print("Error with connecting client");
-            e.printStackTrace();
-        }
-        
-       //example:
-       pw.println("Hello kliens");
-        
-        //make one step and send to client
-        
-    }
-    
     
     @Override
     public int pressButton(String title, JButton button, int i, int j) {
-        genericStep(button,i,j);
+        boolean steppedAway = genericStep(button, i, j);
+        if (steppedAway) {
+            String[] nextSteps = in.nextLine().split(" ");
+            int fromX = Integer.parseInt(nextSteps[0]);
+            int fromY = Integer.parseInt(nextSteps[1]);
+            int toX = Integer.parseInt(nextSteps[2]);
+            int toY = Integer.parseInt(nextSteps[3]);
+            
+            gameTable[fromX][fromY].setText("");
+            gameTable[toX][toY].setText(PREY);
+        }
         return -1;        
     }
     
-    
-    public static void main(String[] args){
-        Server s = new Server(8080,"localhost");
-        try {
-            s.start();
-        } catch (IOException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }
