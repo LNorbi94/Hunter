@@ -23,6 +23,7 @@ public abstract class Logic {
     
     public String me;
     public UniqueButton selected;
+    public UniqueButton lastMoved;
     
     public void setButtons(final JButton[][] gameTable) {
         this.gameTable = gameTable;
@@ -73,6 +74,7 @@ public abstract class Logic {
             boolean steppedAway = selected.place != button;
             selected.place.setBackground(new JButton().getBackground());
             selected.place.setText("");
+            lastMoved = selected;
             selected = null;
             button.setText(me);
             return steppedAway;

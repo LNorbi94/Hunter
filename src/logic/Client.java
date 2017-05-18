@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package logic;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Scanner;
 import javax.swing.JButton;
 
 /**
@@ -21,52 +13,52 @@ import javax.swing.JButton;
 /*Client = prey */
 public class Client extends Logic {
     
-    private PrintWriter pw;
-    private BufferedReader br;
-    private Socket prey;
+    private PrintWriter out;
+    private Scanner in;
     
-    int port;
-    String ip;    
+    private String host;
+    private int port;
     
     
-    public Client(int port, String ip) throws IOException {
+    public Client(String host, int port) {
         this.port = port;
-        this.ip = ip;
+        this.host = host;
         
-        this.prey = new Socket(ip,port);
-        this.pw = new PrintWriter(prey.getOutputStream(),true);
-        this.br = new BufferedReader(new InputStreamReader(prey.getInputStream()));
-        
-    }
-    
-    
-    public void play() throws IOException{
-       System.out.println(br.readLine());
-       
-       //receive message from server
-       //set Hunter's position from the message
-       //make one step
-       //send to server
+        try (Socket s = new Socket(host, port)) {
+            out = new PrintWriter(s.getOutputStream());
+            in = new Scanner(s.getInputStream());
+            
+            receiveOneStep();
+        } catch (Exception e) {
+            System.err.printf("Can't start client on %s host, %d port.\n"
+                    , host, port);
+            
+        }
     }
 
-    
-    
     @Override
     public int pressButton(String title, JButton button, int i, int j) {
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-       genericStep(button,i,j);
-       return -1;  
-    }
-    
-    public static void main(String[] arg){
-        Client c;
-        try {
-            c = new Client(8080,"localhost");
-            c.play();
-        } catch (IOException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        boolean steppedAway = genericStep(button, i, j);
+        if (steppedAway) {
+            switchButtons(false);
+            out.printf("%d %d %d %d", lastMoved.i, lastMoved.j, i, j);
+            out.println();
+            out.flush();
+            
+            receiveOneStep();
+            switchButtons(true);
         }
-        
+        return -1; 
     }
     
+    private void receiveOneStep() {
+        String[] nextSteps = in.nextLine().split(" ");
+        int fromX = Integer.parseInt(nextSteps[0]);
+        int fromY = Integer.parseInt(nextSteps[1]);
+        int toX = Integer.parseInt(nextSteps[2]);
+        int toY = Integer.parseInt(nextSteps[3]);
+
+        gameTable[fromX][fromY].setText("");
+        gameTable[toX][toY].setText(HUNTER);
+    }
 }

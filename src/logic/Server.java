@@ -33,6 +33,11 @@ public class Server extends Logic{
     public int pressButton(String title, JButton button, int i, int j) {
         boolean steppedAway = genericStep(button, i, j);
         if (steppedAway) {
+            switchButtons(false);
+            out.printf("%d %d %d %d", lastMoved.i, lastMoved.j, i, j);
+            out.println();
+            out.flush();
+            
             String[] nextSteps = in.nextLine().split(" ");
             int fromX = Integer.parseInt(nextSteps[0]);
             int fromY = Integer.parseInt(nextSteps[1]);
@@ -41,6 +46,7 @@ public class Server extends Logic{
             
             gameTable[fromX][fromY].setText("");
             gameTable[toX][toY].setText(PREY);
+            switchButtons(true);
         }
         return -1;        
     }
