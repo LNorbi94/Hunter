@@ -136,13 +136,14 @@ public class GameStarter extends JFrame {
                     int port = Integer.parseInt(portTextField.getText());
                     Logic gameLogic;
                     
-                    if (null != host) {
-                        gameLogic = new Server(port);
-                    } else {
+                    if (!host.isEmpty()) {
                         gameLogic = new Client(host, port);
+                    } else {
+                        gameLogic = new Server(port);
                     }
                     
                     Game game = new Game(gameLogic, size);
+                    frame.dispose();
                 } catch (NumberFormatException numE) {
                     JOptionPane.showMessageDialog(null
                             , "Kérem számot adjon meg portként!");

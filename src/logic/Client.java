@@ -21,14 +21,14 @@ public class Client extends Logic {
     
     
     public Client(String host, int port) {
-        this.port = port;
+        this.me = PREY;
         this.host = host;
+        this.port = port;
         
-        try (Socket s = new Socket(host, port)) {
+        try {
+            Socket s = new Socket(host, port);
             out = new PrintWriter(s.getOutputStream());
             in = new Scanner(s.getInputStream());
-            
-            receiveOneStep();
         } catch (Exception e) {
             System.err.printf("Can't start client on %s host, %d port.\n"
                     , host, port);
@@ -61,4 +61,12 @@ public class Client extends Logic {
         gameTable[fromX][fromY].setText("");
         gameTable[toX][toY].setText(HUNTER);
     }
+    
+    @Override
+    public boolean isItMe(final JButton button)
+    { return button.getText().equals(PREY); }
+    
+    @Override
+    public void setMe(final JButton button)
+    { button.setText(PREY); }
 }

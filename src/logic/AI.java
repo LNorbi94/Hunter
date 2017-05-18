@@ -65,4 +65,11 @@ public class AI extends Logic {
         return validButtons;
     }
     
+    @Override
+    public boolean isItMe(final JButton button)
+    { return button.getText().equals(me); }
+    
+    @Override
+    public void setMe(final JButton button)
+    { button.setText(me); }
 }

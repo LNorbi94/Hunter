@@ -61,9 +61,12 @@ public abstract class Logic {
     public abstract int pressButton(String title, JButton button
             , final int i, final int j);
     
+    public abstract boolean isItMe(final JButton button);
+    public abstract void setMe(final JButton button);
+    
     public boolean genericStep(final JButton button, final int i, final int j) {
         if (selected == null) {
-            if (button.getText().equals(me)) {
+            if (isItMe(button)) {
                 button.setBackground( new Color(125, 127, 255) );
                 selected = new UniqueButton(i, j, button);
             }
@@ -76,7 +79,7 @@ public abstract class Logic {
             selected.place.setText("");
             lastMoved = selected;
             selected = null;
-            button.setText(me);
+            setMe(button);
             return steppedAway;
         }
         return false;
