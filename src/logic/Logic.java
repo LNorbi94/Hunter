@@ -25,6 +25,8 @@ public abstract class Logic {
     public UniqueButton selected;
     public UniqueButton lastMoved;
     
+    protected int stepCount;
+    
     public void setButtons(final JButton[][] gameTable) {
         this.gameTable = gameTable;
         me = Logic.HUNTER;
@@ -101,6 +103,14 @@ public abstract class Logic {
                 button.setEnabled(state);
             }
         }
+    }
+    
+    protected int getStepCount() {
+        return stepCount;
+    }
+    
+    protected int stepLeft() {
+        return gameTable.length * 4 - stepCount;
     }
     
 }

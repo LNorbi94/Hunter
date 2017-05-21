@@ -40,26 +40,27 @@ public class Client extends Logic {
     public int pressButton(String title, JButton button, int i, int j) {
         boolean steppedAway = genericStep(button, i, j);
         if (steppedAway) {
-            switchButtons(false);
             out.printf("%d %d %d %d", lastMoved.i, lastMoved.j, i, j);
             out.println();
             out.flush();
             
             receiveOneStep();
-            switchButtons(true);
         }
         return -1; 
     }
     
     private void receiveOneStep() {
-        String[] nextSteps = in.nextLine().split(" ");
-        int fromX = Integer.parseInt(nextSteps[0]);
-        int fromY = Integer.parseInt(nextSteps[1]);
-        int toX = Integer.parseInt(nextSteps[2]);
-        int toY = Integer.parseInt(nextSteps[3]);
-
-        gameTable[fromX][fromY].setText("");
-        gameTable[toX][toY].setText(HUNTER);
+        switchButtons(false);
+        Runnable t = () -> {
+            int fromX = in.nextInt();
+            int fromY = in.nextInt();
+            int toX  = in.nextInt();
+            int toY  = in.nextInt();
+            gameTable[fromX][fromY].setText("");
+            gameTable[toX][toY].setText(HUNTER);
+            switchButtons(true);
+        };
+        new Thread(t).start();
     }
     
     @Override
