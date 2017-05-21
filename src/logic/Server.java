@@ -12,7 +12,6 @@ import javax.swing.JButton;
 import utils.UniqueButton;
 
 /**
- *
  * A Server osztály a Logic absztrakt osztály leszármazottja. 
  * Online játék esetén a támadó játékost reprezentálja.
  * Socketek segítségével képes kommunukálni a Client osztályt példányosító menekülő játékossal.
@@ -123,7 +122,9 @@ public class Server extends Logic{
     { button.setText(me); }
     
     /**
-     * 
+     * Elindít egy szervert a konstruktorban megadott porton és fogadja a kliens csatlakozását.
+     * Példányosítja a hozzá tartozó írót és olvasót,
+     * majd  fogadja az első üzenetet a klienstől. 
      */
     private void startServer() {
         try {

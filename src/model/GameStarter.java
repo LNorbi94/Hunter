@@ -24,14 +24,31 @@ public class GameStarter extends JFrame {
     private int NUM_OF_GAMES;
     private int GAME_SIZE_DIFFERENCE;
     
+    /**
+     * GameStarter osztály konstruktora.
+     * Beállítja a játékok számát és a játék méretét 0-ra.
+     */
     public GameStarter() {
         this(0, 0);
     }
     
+    /**
+     * GameStarter osztály egy paraméteres konstruktora.
+     * Beállítja a játékok számát és a játék méretét n-re.
+     * @param n - játékok száma, játék mérete 
+     */
     public GameStarter(final int n) {
         this(n, n);
     }
     
+    /**
+     * GameStarter osztály két paraméteres konstruktora.
+     * Beállítja a játékok számát n-re és a játék méretét m-re,
+     * amennyiben megfelelnek a feltételeknek.
+     * Különben az alapértelmezett értékre.
+     * @param n - játékok száma
+     * @param m - játék mérete
+     */
     public GameStarter(final int n, final int m) {
         if (2 < n && n < 16 && 1 < m && m < 10) {
             setGameSize(n, n);
@@ -41,15 +58,26 @@ public class GameStarter extends JFrame {
         initialize();
     }
     
+    /**
+     * Beállítja az osztály adattagjait a paraméterek szerint.
+     * @param n - játékok száma
+     * @param m - játék mérete
+     */
     private void setGameSize(int n, int m) {
         NUM_OF_GAMES = n;
         GAME_SIZE_DIFFERENCE = m;
     }
     
+    /**
+     * Beállítja a játékok számát és a játékok méretét az alapértelmezett értékre.
+     */
     private void setDefaultSize() {
         setGameSize(DEFAULT_SIZE, DEFAULT_SIZE);
     }
     
+    /**
+     * 
+     */
     private void initialize() {
         setTitle("Vadászat");
         int height = 60 * (NUM_OF_GAMES / 4);
@@ -69,6 +97,10 @@ public class GameStarter extends JFrame {
         setVisible(true);
     }
     
+    /**
+     * A játék méretének kiválasztására szolgáló gombok létrehozása.
+     * @param size - tábla mérete, sor- és oszlopszám
+     */
     private void createGameButton(final int size) {
         JButton button = new JButton(size + "x" + size);
         button.addActionListener((ActionEvent e) -> {
@@ -79,6 +111,16 @@ public class GameStarter extends JFrame {
         });
         getContentPane().add(button);
     }
+    
+    /**
+     * A játék indításához szükséges ablakokat hozza létre.
+     * Lehetőség van választani offline és online játék közül.
+     * Online játék esetén host és port megadása szükséges.
+     * @param size - játéktábla mérete
+     * @return - kiválasztott mód száma
+     * 0, offline mód esetén
+     * 1, online játék esetén
+     */
     
     private int gameCreator(final int size) {
         final int choice = JOptionPane.showOptionDialog( null
@@ -164,6 +206,10 @@ public class GameStarter extends JFrame {
         return choice;
     }
     
+    /**
+     * Bezárja a játék ablakát.
+     * @param frame - bezárandó ablak
+     */
     public static void exit(JFrame frame) {
         frame.addWindowListener(new WindowAdapter() {
             @Override
@@ -173,6 +219,10 @@ public class GameStarter extends JFrame {
         });
     }
     
+    /**
+     * A játékból való kilépés megerősítésére szolgáló ablak megjelenítése.
+     * A kilépés opció esetén az alkalmazás bezárása.
+     */
     private static void exit() {
         final int choice = JOptionPane.showOptionDialog( null
                         , "Biztosan ki szeretne lépni?"
