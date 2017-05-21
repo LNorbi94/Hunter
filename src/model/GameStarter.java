@@ -18,6 +18,12 @@ import logic.Server;
  *  It also provides a function for closing the game for further use.
  *  @author lestarn
  */
+
+/**
+ * Biztosítja a játék elindítását, játék méretének és módjának (offline/online) kiválasztását.
+ * 
+ * @author lestarn
+ */
 public class GameStarter extends JFrame {
     
     private final int DEFAULT_SIZE = 3;

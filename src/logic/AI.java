@@ -6,10 +6,15 @@ import javax.swing.JButton;
 import utils.UniqueButton;
 
 /**
- *
- * @author lestarn
+ *@author lestarn
+ * Az AI osztály a Logic absztrakt osztály leszármazottja. 
+ * Offline játék esetén a menekülő játékost reprezentálja.
+ * Tartalmazza Logic osztály metódusait, továbbá megvalósítja a 
+ * pressButton, isItMe és setMe absztrakt metódusokat.
+ * 
  */
 public class AI extends Logic {
+    
     
     @Override
     public int pressButton(String title, JButton button, final int i, final int j) {
@@ -52,10 +57,16 @@ public class AI extends Logic {
         return -1;
     }
     
+     /**
+     * Logic osztály absztrakt isItMe metódus felüldefiniálása.
+     */
     @Override
     public boolean isItMe(final JButton button)
     { return button.getText().equals(me); }
     
+     /**
+     * Logic osztály absztrakt setMe metódusánák felüldefiniálása.
+     */
     @Override
     public void setMe(final JButton button)
     { button.setText(me); }

@@ -25,4 +25,18 @@ public class UniqueButton {
     public double distanceFrom(UniqueButton other) {
         return Math.sqrt(Math.pow(i - other.i, 2) + Math.pow(j - other.j, 2));
     }
+
+    public int getI() {
+        return i;
+    }
+
+    public int getJ() {
+        return j;
+    }
+
+    public JButton getPlace() {
+        return place;
+    }
+    
+    
 }

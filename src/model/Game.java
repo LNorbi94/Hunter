@@ -9,7 +9,8 @@ import javax.swing.JOptionPane;
 import logic.Logic;
 
 /**
- *
+ * Játék megjelenítésére szolgáló osztály.
+ * 
  * @author lestarn
  */
 public class Game extends JFrame {
@@ -18,6 +19,14 @@ public class Game extends JFrame {
     private final Logic gameLogic;
     private final JButton[][] gameTable;
     
+    /**
+     * A Game osztály konstruktora.
+     * Inicializálja a megadott paraméterekkel az adattagokat 
+     * és beállítja a megfelelő méretű táblát a játékhoz.
+     * @param gameLogic - a játék módja, offline mód esetén a mesterséges intelligenciát reprezentáló osztály
+     * online mód esetén a kliens és szerver osztálya
+     * @param size - játék tábla mérete
+     */    
     public Game(final Logic gameLogic, final int size) {
         this.size = size;
         this.gameLogic = gameLogic;
@@ -25,6 +34,9 @@ public class Game extends JFrame {
         initialize();
     }
     
+    /**
+     * Inicializálja a játék tábláját, hozzáadja a megfelelő számú gombokat.
+     */
     private void initialize() {
         setTitle("Vadászat");
         setBounds(100, 100, 1024, 768);
@@ -44,6 +56,12 @@ public class Game extends JFrame {
         setVisible(true);
     }
     
+    /**
+     * 
+     * @param i
+     * @param j
+     * @return 
+     */
     private JButton addButton(final int i, final int j) {
         final JButton button = new JButton();
 
