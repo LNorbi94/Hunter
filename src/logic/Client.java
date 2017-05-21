@@ -9,12 +9,13 @@ import javax.swing.JButton;
 import utils.UniqueButton;
 
 /**
- *@author t_ani
+ *
  * A Client osztály a Logic absztrakt osztály leszármazottja. 
  * Online játék esetén a menekülő játékost reprezentálja.
  * Socketek segítségével képes kommunukálni a Server osztályt példányosító támadó játékossal.
  * Tartalmazza Logic osztály metódusait, továbbá megvalósítja a 
  * pressButton, isItMe és setMe absztrakt metódusokat.
+ * @author t_ani
  */
 public class Client extends Logic {
     
@@ -28,8 +29,8 @@ public class Client extends Logic {
     * Client osztály konstruktora, mely a paraméterként megadott host-hoz és port-hoz csatlakozik.
     * Példányosít egy írót és egy olvasót, melyek segítségével a szerver osztállyal
     * - támadó játékossal - kommunikál.
-    * @param host - csatlakozni kívánt host cím
-    * @param port - csatlakozni kívánt port szám
+    * @param host - csatlakozni kívánt host, String típusú
+    * @param port - csatlakozni kívánt port, int típusú
     */ 
     public Client(String host, int port) {
         this.me = PREY;
@@ -40,10 +41,8 @@ public class Client extends Logic {
             Socket s = new Socket(host, port);
             out = new PrintWriter(s.getOutputStream());
             in = new Scanner(s.getInputStream());
-        } catch (Exception e) {
-            System.err.printf("Can't start client on %s host, %d port.\n"
-                    , host, port);
-            
+        } catch (IOException e) {
+            System.err.printf("Can't start client on %s host, %d port.\n", host, port);
         }
     }
 

@@ -1,6 +1,5 @@
 package model;
 
-import hunter.Hunter;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
@@ -43,7 +42,6 @@ public class Game extends JFrame {
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout( new GridLayout(size, size, 0, 0) );
         GameStarter.exit(this);
-        // TODO: createMenuBar();
         
         for(int i = 0; i < size; ++i) {
             for(int j = 0; j < size; ++j) {

@@ -1,20 +1,19 @@
 package logic;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import utils.UniqueButton;
 
 /**
- *@author lestarn
+ *
  * Az AI osztály a Logic absztrakt osztály leszármazottja. 
  * Offline játék esetén a menekülő játékost reprezentálja.
  * Tartalmazza Logic osztály metódusait, továbbá megvalósítja a 
  * pressButton, isItMe és setMe absztrakt metódusokat.
  * 
+ * @author lestarn
  */
 public class AI extends Logic {
-    
     
     @Override
     public int pressButton(String title, JButton button, final int i, final int j) {
@@ -22,9 +21,8 @@ public class AI extends Logic {
         if (steppedAway) {
             stepCount++;
             
-            if (stepLeft() == 0) {
+            if (stepLeft() == 0)
                 return 0;
-            }
             
             switchButtons(false);
             List<UniqueButton> validButtons = gatherValidButtons();

@@ -8,17 +8,10 @@ public class Hunter {
     private static final int DEFAULT_GAME_SIZE_DIFFERENCE = 2;
 
     /**
-     * Starts new game with the default value.
-     * If an integer argument is provided, it starts the game with the
-     * value of the argument.
-     * @param args - optional: (int) number of games (between 1 and 5)
-     * , (int) game size (between 1 and 4)
-     */
-    
-    /**
-     * Új játékot indít a default értékkel.
+     * Új játékot indít az alapértelmezett értékkel.
      * Ha a paraméterben egy egész szám szerepel, akkor azzal az értékkel indítja a játékot.
-     * @param args - opcionális: 
+     * @param args - opcionális: (int) játékok száma (1 és 5 között)
+     * , (int) játék mérete (1 és 4 között)
      */
     public static void main(String[] args) {
         int num_of_games = DEFAULT_NUM_OF_GAMES;

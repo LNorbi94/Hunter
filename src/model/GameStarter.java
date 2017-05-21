@@ -13,13 +13,6 @@ import logic.Logic;
 import logic.Server;
 
 /**
- *  A class which provides a starting interface to choose what game sizes
- *  and mode to start with.
- *  It also provides a function for closing the game for further use.
- *  @author lestarn
- */
-
-/**
  * Biztosítja a játék elindítását, játék méretének és módjának (offline/online) kiválasztását.
  * 
  * @author lestarn

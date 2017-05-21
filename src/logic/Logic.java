@@ -7,11 +7,12 @@ import javax.swing.JButton;
 import utils.UniqueButton;
 
 /**
- *@author lestarn
- * A játék logikáját adó absztarkt osztály.
+ *
+ * A játék logikáját adó absztrakt osztály.
  * Ezen osztály megvalósítása a mesterséges intelligenciát végző osztály, 
  * illetve online játék esetén a kliens és szerver osztályok.
  * 
+ * @author lestarn
  */
 public abstract class Logic {
     
@@ -32,7 +33,7 @@ public abstract class Logic {
     
     /**
      * Beállítja a játékhoz a kezdeti táblát. 
-     * Beállítja a "me" adattagok a Hunterre. 
+     * Beállítja a "me" adattagot a Hunterre. 
      * @param gameTable - beállítandó tábla, gombok 2 dimenziós tömbje
      */
     public void setButtons(final JButton[][] gameTable) {
@@ -46,7 +47,7 @@ public abstract class Logic {
      *  
      * @param i - a tábla i-edik sora
      * @param j - a tábla j-edig oszlopa
-     * @param place - a gameTable[i][j]-edig gombaja, ahová a támadó lépett
+     * @param place - a gameTable[i][j]-edig gombja, ahová a támadó lépett
      */
     public void addHunter(final int i, final int j, final JButton place) {
         if (null == Hunters) {
@@ -76,7 +77,7 @@ public abstract class Logic {
     }
     
     /**
-     * Megváltozatja a menekülő pozícióját.
+     * Megváltoztatja a menekülő pozícióját.
      * @param i - új lépésének i-edik sora
      * @param j - új lépésének j-edig oszlopa
      * @param place - a gameTable[i][j] -edik gombja
@@ -106,9 +107,9 @@ public abstract class Logic {
     
     /**
      * Absztrakt metódus, mely megvizsgálja, hogy az éppen kiválasztott gomb
-     * menekülő vagy támadó.
+     * menekülő, vagy támadó.
      * 
-     * @param button - kiválasztot gomb
+     * @param button - kiválasztott gomb
      * @return - igaz érték, ha menekülő esetén a kiválasztott gomb is menekülő,
      * illetve, ha támadó esetén a kiválasztott gomb is támadó
      */    
@@ -123,10 +124,10 @@ public abstract class Logic {
     
     /**
      * Elvégzi a lépés feltételeinek ellenőrzéseit, majd lép egyet a kiválasztott gombbal, ha tud.
-     * Ha épp nincsen gomb kijelölve és a paraméterként megadott gomb megegyezik saját magával, mint menekülő vagy támadó,
+     * Ha épp nincsen gomb kijelölve, és a paraméterként megadott gomb megegyezik saját magával, mint menekülő vagy támadó,
      * akkor kijelöli a gombot.
      * Ha van már kijelölve gomb, akkor ellenőrzi, hogy tud-e oda lépni a játékos. 
-     * Ha tud, akkor odalép és igazzal tér vissza, különben hamissal.
+     * Ha tud, akkor odalép, és igazzal tér vissza, különben hamissal.
      * @param button - a kattintott gomb
      * @param i - új lépés sorának száma
      * @param j - új lépés oszlopának száma
@@ -156,7 +157,7 @@ public abstract class Logic {
 
     /**
      * Egy lépés megtételéhez szükséges feltételt vizsgáló metódus.
-     * A játékos kiválaszott gombra léphet, amennyiben az vagy vele egy oszlopban,
+     * A játékos kiválasztott gombra léphet, amennyiben az vagy vele egy oszlopban,
      * vagy vele egy sorban található, közvetlenül mellette. Az átlós lépés nem megengedett.
      * 
      * @param i - új lépés i-edik sora

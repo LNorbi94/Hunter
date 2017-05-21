@@ -1,7 +1,5 @@
 package logic;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -14,12 +12,14 @@ import javax.swing.JButton;
 import utils.UniqueButton;
 
 /**
- *@author t_ani
+ *
  * A Server osztály a Logic absztrakt osztály leszármazottja. 
  * Online játék esetén a támadó játékost reprezentálja.
  * Socketek segítségével képes kommunukálni a Client osztályt példányosító menekülő játékossal.
  * Tartalmazza Logic osztály metódusait, továbbá megvalósítja a 
  * pressButton, isItMe és setMe absztrakt metódusokat.
+ * 
+ * @author t_ani
  */
 
 public class Server extends Logic{
