@@ -1,9 +1,11 @@
 package model;
 
+import hunter.Hunter;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import logic.Logic;
 
 /**
@@ -60,8 +62,19 @@ public class Game extends JFrame {
             String title = "Vadászat";
             int winner = gameLogic.pressButton(title, button, i, j);
             
-            if (-1 == winner) {
-                return;
+            switch (winner) {
+                case -1:
+                    return;
+                case 0:
+                    JOptionPane.showMessageDialog(null
+                            , "Sajnálom! Ön vesztett! :(");
+                    dispose();
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null
+                            , "Gratulálok! Ön nyert! :)");
+                    dispose();
+                    break;
             }
             
             setTitle(title);

@@ -15,6 +15,12 @@ public class AI extends Logic {
     public int pressButton(String title, JButton button, final int i, final int j) {
         boolean steppedAway = genericStep(button, i, j);
         if (steppedAway) {
+            stepCount++;
+            
+            if (stepLeft() == 0) {
+                return 0;
+            }
+            
             switchButtons(false);
             List<UniqueButton> validButtons = gatherValidButtons();
             
@@ -40,29 +46,10 @@ public class AI extends Logic {
                 placeToStep.place.setText(PREY);
                 switchButtons(true);
             } else {
-                // game over
+                return 1;
             }
         }
         return -1;
-    }
-    
-    public List<UniqueButton> gatherValidButtons() {
-        List<UniqueButton> validButtons = new ArrayList<>();
-        for (int i = -1; i <= 1; ++i) {
-            for (int j = -1; j <= 1; ++j) {
-                int x = Prey.i + i;
-                int y = Prey.j + j;
-                if (isValid(x, y)
-                        && isNextTo(x, y, Prey)) {
-                    boolean empty 
-                            = gameTable[x][y].getText().isEmpty();
-                    if (empty)
-                        validButtons.add(
-                                new UniqueButton(x, y, gameTable[x][y]));
-                }
-            }
-        }
-        return validButtons;
     }
     
     @Override

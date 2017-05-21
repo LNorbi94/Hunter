@@ -3,8 +3,10 @@ package logic;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.List;
 import java.util.Scanner;
 import javax.swing.JButton;
+import utils.UniqueButton;
 
 /**
  *
@@ -39,28 +41,36 @@ public class Client extends Logic {
     @Override
     public int pressButton(String title, JButton button, int i, int j) {
         boolean steppedAway = genericStep(button, i, j);
+        setPrey(i, j, button);
         if (steppedAway) {
             out.printf("%d %d %d %d", lastMoved.i, lastMoved.j, i, j);
             out.println();
             out.flush();
             
             receiveOneStep();
+            stepCount++;
+            
+            List<UniqueButton> validButtons = gatherValidButtons();
+            if (validButtons.isEmpty()) {
+                return 0;
+            }
+            
+            if (stepLeft() == 0) {
+                return 1;
+            }
         }
         return -1; 
     }
     
     private void receiveOneStep() {
         switchButtons(false);
-        Runnable t = () -> {
-            int fromX = in.nextInt();
-            int fromY = in.nextInt();
-            int toX  = in.nextInt();
-            int toY  = in.nextInt();
-            gameTable[fromX][fromY].setText("");
-            gameTable[toX][toY].setText(HUNTER);
-            switchButtons(true);
-        };
-        new Thread(t).start();
+        int fromX = in.nextInt();
+        int fromY = in.nextInt();
+        int toX  = in.nextInt();
+        int toY  = in.nextInt();
+        gameTable[fromX][fromY].setText("");
+        gameTable[toX][toY].setText(HUNTER);
+        switchButtons(true);
     }
     
     @Override

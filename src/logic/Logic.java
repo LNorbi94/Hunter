@@ -113,4 +113,23 @@ public abstract class Logic {
         return gameTable.length * 4 - stepCount;
     }
     
+    public List<UniqueButton> gatherValidButtons() {
+        List<UniqueButton> validButtons = new ArrayList<>();
+        for (int i = -1; i <= 1; ++i) {
+            for (int j = -1; j <= 1; ++j) {
+                int x = Prey.i + i;
+                int y = Prey.j + j;
+                if (isValid(x, y)
+                        && isNextTo(x, y, Prey)) {
+                    boolean empty 
+                            = gameTable[x][y].getText().isEmpty();
+                    if (empty)
+                        validButtons.add(
+                                new UniqueButton(x, y, gameTable[x][y]));
+                }
+            }
+        }
+        return validButtons;
+    }
+    
 }

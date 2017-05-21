@@ -2,9 +2,6 @@ package model;
 
 import java.awt.FlowLayout;
 import java.awt.event.*;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -97,11 +94,17 @@ public class GameStarter extends JFrame {
             Logic gameLogic = new AI();
             Game game = new Game(gameLogic, size);
         } else if (1 == choice) {
+            
+            JOptionPane.showMessageDialog(null
+                    , "Ez a játékmód csak 4x4-es táblával játszható!"
+                            + " A tábla mérete átállításra került.");
+            
             JFrame frame;
             JTextField ipTextField;
             JTextField portTextField;
             
             frame = new JFrame();
+            frame.setTitle("Adatok megadása");
             frame.setBounds(100, 100, 300, 200);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.getContentPane().setLayout(null);
@@ -142,7 +145,7 @@ public class GameStarter extends JFrame {
                         gameLogic = new Server(port);
                     }
                     
-                    Game game = new Game(gameLogic, size);
+                    Game game = new Game(gameLogic, 4);
                     frame.dispose();
                 } catch (NumberFormatException numE) {
                     JOptionPane.showMessageDialog(null

@@ -6,10 +6,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JButton;
+import utils.UniqueButton;
 
 /**
  *
@@ -43,6 +45,17 @@ public class Server extends Logic{
             out.println();
             out.flush();
             
+            stepCount++;
+            
+            if (stepLeft() == 0) {
+                return 0;
+            }
+            
+            List<UniqueButton> validButtons = gatherValidButtons();
+            if (validButtons.isEmpty()) {
+                return 1;
+            }
+            
             receiveOneStep();
         }
         return -1;
@@ -57,6 +70,7 @@ public class Server extends Logic{
             int toY  = in.nextInt();
             gameTable[fromX][fromY].setText("");
             gameTable[toX][toY].setText(PREY);
+            setPrey(toX, toY, gameTable[toX][toY]);
             switchButtons(true);
         };
         new Thread(t).start();
