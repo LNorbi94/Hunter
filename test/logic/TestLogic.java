@@ -19,13 +19,35 @@ import utils.UniqueButton;
  * @author suszt
  */
 public class TestLogic {
-    //private Logic logic;
-    
     private ByteArrayOutputStream outContent;
     
     @Before public void initialize() {
         outContent = new ByteArrayOutputStream();
         System.setErr(new PrintStream(outContent));
+    }
+    
+    @Test
+    public void testGenericStepSelectedNull() {
+        JButton button = new JButton();
+        Logic logic = new LogicImpl();
+        assertFalse("A genericStep() engedi a lépést rossz esetben.",
+                logic.genericStep(button,10,10));
+    }
+    
+    @Test
+    public void testGenericStepSelectedNotNull() {
+        JButton button = new JButton();
+        Logic logic = new LogicImpl();
+        logic.selected = new UniqueButton(1,1,button);
+        button.setText("");
+        JButton button2 = new JButton();
+        
+        assertFalse("A genericStep() nem engedi a lépést jó esetben.",
+                logic.genericStep(button, 2, 1));
+        
+        logic.selected = new UniqueButton(1,1,button2);
+        assertTrue("A genericStep() nem engedi a lépést jó esetben.",
+                logic.genericStep(button, 2, 1));
     }
     
     @Test
@@ -53,10 +75,17 @@ public class TestLogic {
                 logic.isNextTo(2,2,selected));
     }
     
+    
+    @Test
+    public void testIsValid() {
+        JButton[][] testGameTable = new JButton[10][10];
+        Logic logic = new LogicImpl();
+        logic.gameTable = testGameTable;
+        assertTrue("Az isValid() hamisat ad vissza megfelelő pozíciók esetén.",logic.isValid(8,7));
+        assertFalse("Az isValid() igazat ad vissza rossz pozíciók esetén.",logic.isValid(11, 12));
+    }
+    
     public class LogicImpl extends Logic {
-        
-        public JButton[][] gameTable;
-
         public int pressButton(JButton button, int i, int j) {
             return 0;
         }
