@@ -60,7 +60,7 @@ public class Client extends Logic {
      * 1, ha elfogytak a támadó lépései, azaz nyert a menekülő
      */
     @Override
-    public int pressButton(String title, JButton button, int i, int j) {
+    public int pressButton(JButton button, int i, int j) {
         boolean steppedAway = genericStep(button, i, j);
         setPrey(i, j, button);
         if (steppedAway) {

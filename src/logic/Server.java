@@ -59,7 +59,7 @@ public class Server extends Logic{
      * 1, ha a menekülő nem tud lépni, azaz nyert a támadó
      */
     @Override
-    public int pressButton(String title, JButton button, int i, int j) {
+    public int pressButton(JButton button, int i, int j) {
         boolean steppedAway = genericStep(button, i, j);
         if (steppedAway) {
             out.printf("%d %d %d %d", lastMoved.i, lastMoved.j, i, j);

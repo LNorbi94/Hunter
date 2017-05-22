@@ -102,8 +102,7 @@ public abstract class Logic {
      * 0, ha vesztett a játékos
      * 1, ha nyert a játékos
      */
-    public abstract int pressButton(String title, JButton button
-            , final int i, final int j);
+    public abstract int pressButton(JButton button, final int i, final int j);
     
     /**
      * Absztrakt metódus, mely megvizsgálja, hogy az éppen kiválasztott gomb

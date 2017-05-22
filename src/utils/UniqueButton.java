@@ -3,7 +3,8 @@ package utils;
 import javax.swing.JButton;
 
 /**
- *
+ * Egyedi gombot valósít meg, ami eltárolja a relatív pozicíóját is a játéktáblában.
+ * 
  * @author lestarn
  */
 public class UniqueButton {

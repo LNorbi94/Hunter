@@ -1,5 +1,6 @@
 package model;
 
+import hunter.Hunter;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
@@ -80,24 +81,36 @@ public class Game extends JFrame {
 
         button.addActionListener( (ActionEvent e) -> {
             String title = "Vadászat";
-            int winner = gameLogic.pressButton(title, button, i, j);
+            int winner = gameLogic.pressButton(button, i, j);
+            String message;
             
             switch (winner) {
                 case -1:
                     return;
                 case 0:
-                    JOptionPane.showMessageDialog(null
-                            , "Sajnálom! Ön vesztett! :(");
-                    dispose();
+                    message = "Sajnálom! Ön vesztett! :(";
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null
-                            , "Gratulálok! Ön nyert! :)");
-                    dispose();
+                    message = "Gratulálok! Ön nyert! :)";
                     break;
             }
-            
-            setTitle(title);
+            if (!message.isEmpty()) {
+                final int choice = JOptionPane.showOptionDialog( null
+                                , message + " Mit szeretne most tenni?"
+                                , "Játék vége!"
+                                , JOptionPane.YES_NO_OPTION
+                                , JOptionPane.QUESTION_MESSAGE
+                                , null
+                                , new Object[] {"Új játék", "Kilépés"}
+                                , "Kilépés" );
+                
+                if (0 == choice) {
+                    Hunter.main(new String[0]);
+                    dispose();
+                } else {
+                    System.exit(0);
+                }
+            }
         });
 
         return button;

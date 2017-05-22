@@ -16,7 +16,7 @@ import utils.UniqueButton;
 public class AI extends Logic {
     
     @Override
-    public int pressButton(String title, JButton button, final int i, final int j) {
+    public int pressButton(JButton button, final int i, final int j) {
         boolean steppedAway = genericStep(button, i, j);
         if (steppedAway) {
             stepCount++;

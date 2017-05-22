@@ -2,11 +2,13 @@ package model;
 
 import java.awt.FlowLayout;
 import java.awt.event.*;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
 import logic.AI;
 import logic.Client;
 import logic.Logic;
@@ -26,7 +28,7 @@ public class GameStarter extends JFrame {
     
     /**
      * GameStarter osztály konstruktora.
-     * Beállítja a játékok számát és a játék méretét 0-ra.
+     * Az alapértelmezett értékekkel fog így elindulni a játék.
      */
     public GameStarter() {
         this(0, 0);
@@ -76,7 +78,7 @@ public class GameStarter extends JFrame {
     }
     
     /**
-     * 
+     * Beállítja az ablak kinézetét, és felhelyezi a gombokat a táblára.
      */
     private void initialize() {
         setTitle("Vadászat");
