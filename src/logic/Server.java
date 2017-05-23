@@ -127,6 +127,7 @@ public class Server extends Logic{
      * majd  fogadja az első üzenetet a klienstől. 
      */
     private void startServer() {
+        switchButtons(false);
         try {
             ServerSocket ss = new ServerSocket(port);
             Socket s = ss.accept();
