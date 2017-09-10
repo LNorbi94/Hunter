@@ -37,7 +37,7 @@ public class AI extends Logic {
                 for (UniqueButton Hunter : Hunters) {
                     distance += newPlace.distanceFrom(Hunter);
                 }
-                if (distance < minDistance) {
+                if (distance > minDistance) {
                     minDistance = distance;
                     placeToStep = newPlace;
                 }
